@@ -25,50 +25,40 @@ DEFAULT_FILE_FORMAT = (
 
 
 def get_logger(
-    name=None,
-    logger_level=DEBUG,
-    console=True,
-    console_format=DEFAULT_CONSOLE_FORMAT,
-    console_level=INFO,
-    file_name=None,
-    file_format=DEFAULT_FILE_FORMAT,
-    file_level=DEBUG,
+        caller_name,
+        logger_level=DEBUG,
+        console=True,
+        console_format=DEFAULT_CONSOLE_FORMAT,
+        console_level=INFO,
+        file_name=None,
+        file_format=DEFAULT_FILE_FORMAT,
+        file_level=DEBUG,
 ):
-    if name:
-        caller_name = name
-    else:
-        caller_frame = inspect.stack()[1]
-        caller_module = inspect.getmodule(caller_frame[0])
-        caller_name = caller_module.__name__
-    if caller_name != "__main__":
-        logger = logging.getLogger(caller_name)
-    else:
-        logger = colorlog.getLogger()
-        configure_main_logger(
-            logger,
-            logger_level,
-            console,
-            console_format,
-            console_level,
-            file_name,
-            file_format,
-            file_level,
-        )
+    logger = colorlog.getLogger(name=caller_name)
+    configure_main_logger(
+        logger,
+        logger_level,
+        console,
+        console_format,
+        console_level,
+        file_name,
+        file_format,
+        file_level,
+    )
     return logger
 
 
 def configure_main_logger(
-    logger,
-    logger_level=DEBUG,
-    console=True,
-    console_format=DEFAULT_CONSOLE_FORMAT,
-    console_level=INFO,
-    file_name=None,
-    file_format=DEFAULT_FILE_FORMAT,
-    file_level=DEBUG,
+        logger,
+        logger_level=DEBUG,
+        console=True,
+        console_format=DEFAULT_CONSOLE_FORMAT,
+        console_level=INFO,
+        file_name=None,
+        file_format=DEFAULT_FILE_FORMAT,
+        file_level=DEBUG,
 ):
     logger.setLevel(logger_level)
-
     if console:
         console_formatter = colorlog.ColoredFormatter(
             console_format,
