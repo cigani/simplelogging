@@ -4,7 +4,6 @@ __author__ = """Vincent Poulailleau"""
 __email__ = "vpoulailleau@gmail.com"
 __version__ = "0.10.0"
 
-import inspect
 import logging
 from logging import CRITICAL, DEBUG, ERROR, INFO, WARNING
 from logging.handlers import RotatingFileHandler
